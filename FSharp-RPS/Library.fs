@@ -66,14 +66,22 @@ type GameTied =
 module internal RehydrateGameState =
     let private apply (state: GameState) (event: DomainEvent) =
         match event with
-        | :? GameCreated as g ->
-            { GameId = g.GameId
+        | :? GameCreated as e ->
+            { GameId = e.GameId
               GameProgress = NotStarted }
-        | :? MoveMade as m ->
+        | :? MoveMade as e ->
             if (state.GameProgress = NotStarted) then
-                { state with GameProgress = FirstMoveMade { PlayerId = m.PlayerId; Move = m.Move } }
+                { state with GameProgress = FirstMoveMade { PlayerId = e.PlayerId; Move = e.Move } }
             else
                 state
+        | :? GameWon as e ->
+            match state.GameProgress with
+            | FirstMoveMade _ -> { state with GameProgress = GameEnded (Won e.WinnerId) }
+            | _ -> state
+        | :? GameTied ->
+            match state.GameProgress with
+            | FirstMoveMade _ -> { state with GameProgress = GameEnded Tied }
+            | _ -> state
         | _ -> state
 
     let rehydrate (events: DomainEvent list): GameState =
