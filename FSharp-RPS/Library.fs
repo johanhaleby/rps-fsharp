@@ -76,7 +76,7 @@ module internal RehydrateGameState =
                 state
         | _ -> state
 
-    let rehuydrate (events: DomainEvent list): GameState =
+    let rehydrate (events: DomainEvent list): GameState =
         let initialState =
             { GameId = GameId.NewGuid()
               GameProgress = Uninitialized }
