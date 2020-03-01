@@ -90,6 +90,17 @@ module RecreateGameState =
               GameProgress = Uninitialized }
         List.fold apply initialState events
 
+// Game rules - we simulate infix function with an extension function since
+//              it doesn't seem like it's possible to define infix functions in F#
+type internal Move with
+    member m1.beats (m2: Move) =
+        match (m1, m2) with
+        | (Rock, Scissors) -> true
+        | (Paper, Rock) -> true
+        | (Scissors, Paper) -> true
+        | _ -> false
+
+
 // The actual game
 module Game =
     let private createGame state gameId createdBy: DomainEvent list =
@@ -100,15 +111,6 @@ module Game =
                   CreatedBy = createdBy }
             [ gameCreated ]
         | _ -> []
-
-    // Simulate infix function with extension function....
-    type internal Move with
-        member m1.beats (m2: Move) =
-            match (m1, m2) with
-            | (Rock, Scissors) -> true
-            | (Paper, Rock) -> true
-            | (Scissors, Paper) -> true
-            | _ -> false
 
     let private play state playerId move: DomainEvent list =
         match state.GameProgress with
