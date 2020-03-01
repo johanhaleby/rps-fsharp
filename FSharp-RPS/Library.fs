@@ -63,7 +63,7 @@ type GameTied =
         member x.GameId = x.GameId
 
 // Derive current state from previous events
-module RehydrateGameState =
+module RecreateGameState =
     let private apply (state: GameState) (event: DomainEvent) =
         match event with
         | :? GameCreated as e ->
@@ -84,7 +84,7 @@ module RehydrateGameState =
             | _ -> state
         | _ -> state
 
-    let rehydrateGameStateFrom (events: DomainEvent list): GameState =
+    let recreateGameStateFrom (events: DomainEvent list): GameState =
         let initialState =
             { GameId = GameId.NewGuid()
               GameProgress = Uninitialized }

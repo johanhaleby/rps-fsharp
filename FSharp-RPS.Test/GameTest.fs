@@ -3,7 +3,7 @@ module Tests
 open NFluent
 open Xunit
 open RPS
-open RehydrateGameState
+open RecreateGameState
 open Xunit
 
 [<Fact>]
@@ -30,7 +30,7 @@ let ``Returns move made event with supplied game id, player id and move player i
     let playerId = PlayerId.NewGuid()
     let previousEvents : DomainEvent list = [{GameCreated.GameId = gameId; CreatedBy = playerId }]
     
-    let state = rehydrateGameStateFrom previousEvents 
+    let state = recreateGameStateFrom previousEvents 
     let cmd = Play(gameId, playerId, move = Rock)
     
     // When
@@ -49,7 +49,7 @@ let ``Returns move made and game won events when second player beats first playe
     let previousEvents : DomainEvent list = [{GameCreated.GameId = gameId; CreatedBy = firstPlayerId }
                                              {MoveMade.GameId = gameId; PlayerId = firstPlayerId; Move = Rock }]
     
-    let state = rehydrateGameStateFrom previousEvents 
+    let state = recreateGameStateFrom previousEvents 
     let cmd = Play(gameId, secondPlayerId, move = Paper)
     
     // When
@@ -68,7 +68,7 @@ let ``Returns move made and game tied events when second player makes same move 
     let previousEvents : DomainEvent list = [{GameCreated.GameId = gameId; CreatedBy = firstPlayerId }
                                              {MoveMade.GameId = gameId; PlayerId = firstPlayerId; Move = Scissors }]
     
-    let state = rehydrateGameStateFrom previousEvents 
+    let state = recreateGameStateFrom previousEvents 
     let cmd = Play(gameId, secondPlayerId, move = Scissors)
     
     // When
