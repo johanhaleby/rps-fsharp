@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp-RPS", "FSharp-RPS\FSharp-RPS.fsproj", "{11372E72-3F33-4663-9B3C-83560B9FD5CC}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharp-RPS.Test", "FSharp-RPS.Test\FSharp-RPS.Test.fsproj", "{C9EB7765-A425-497A-801C-85B43E43B49C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{11372E72-3F33-4663-9B3C-83560B9FD5CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11372E72-3F33-4663-9B3C-83560B9FD5CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11372E72-3F33-4663-9B3C-83560B9FD5CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9EB7765-A425-497A-801C-85B43E43B49C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9EB7765-A425-497A-801C-85B43E43B49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9EB7765-A425-497A-801C-85B43E43B49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9EB7765-A425-497A-801C-85B43E43B49C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
