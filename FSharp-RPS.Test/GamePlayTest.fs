@@ -1,10 +1,9 @@
-module Tests
+module GamePlayTest
 
 open NFluent
 open Xunit
 open RPS
 open RecreateGameState
-open Xunit
 
 [<Fact>]
 let ``Returns game created event with supplied game id and creator when creating new game``() =

@@ -102,7 +102,7 @@ module Game =
         | _ -> []
 
     // Simulate infix function with extension function....
-    type private Move with
+    type internal Move with
         member m1.beats (m2: Move) =
             match (m1, m2) with
             | (Rock, Scissors) -> true
