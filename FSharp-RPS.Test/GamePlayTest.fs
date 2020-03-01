@@ -16,11 +16,10 @@ let ``Returns game created event with supplied game id and creator when creating
     let cmd : Command = CreateGame(gameId, playerId)
     
     // When
-    let events : DomainEvent list = Game.handle state cmd
+    let events : DomainEvent seq = Game.handle state cmd |> Seq.ofList
     
     // Then
-    let expected : DomainEvent list = [{GameId = gameId; CreatedBy = playerId }]
-    Assert.Equal<DomainEvent list>(expected, events)
+    Check.That(events).ContainsExactly({GameId = gameId; CreatedBy = playerId })
     
 [<Fact>]
 let ``Returns move made event with supplied game id, player id and move player is making the first move of the game``() =
@@ -33,11 +32,10 @@ let ``Returns move made event with supplied game id, player id and move player i
     let cmd = Play(gameId, playerId, move = Rock)
     
     // When
-    let events : DomainEvent list = Game.handle state cmd
+    let events : DomainEvent seq = Game.handle state cmd |> Seq.ofList
     
     // Then
-    let expected : DomainEvent list =  [{MoveMade.GameId = gameId; PlayerId = playerId; Move = Rock }]
-    Assert.Equal<DomainEvent list>(expected, events)
+    Check.That(events).ContainsExactly({MoveMade.GameId = gameId; PlayerId = playerId; Move = Rock })
     
 [<Fact>]
 let ``Returns move made and game won events when second player beats first player``() =
